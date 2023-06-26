@@ -1,16 +1,42 @@
-import { Contacts } from './Contacts';
-import { Filter } from './Filter';
-import { Forma } from './Forma';
-import { ContainerForm } from './App.styled';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import Contacts from '../pages/Contacts';
+import Register from '../pages/Register';
+import Login from '../pages/Login';
+import Header from './Header/Header';
+import PrivateRouter from './PrivateRouter/PrivateRouter';
+import PublicRouter from './PublicRouter/PublicRouter';
 
 export const App = () => {
   return (
-    <ContainerForm>
-      <h1>Phonebook</h1>
-      <Forma />
-      <h2>Contacts</h2>
-      <Filter />
-      <Contacts />
-    </ContainerForm>
+    <>
+      <Header />
+      <Routes>
+        <Route
+          path="/register"
+          element={
+            <PublicRouter>
+              <Register />
+            </PublicRouter>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRouter>
+              <Login />
+            </PublicRouter>
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRouter>
+              <Contacts />
+            </PrivateRouter>
+          }
+        />
+        <Route path="*" element={<Navigate to={'/login'} />} />
+      </Routes>
+    </>
   );
 };

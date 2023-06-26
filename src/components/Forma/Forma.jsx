@@ -5,14 +5,14 @@ import { addContactThunk } from 'redux/sliceContact';
 
 export const Forma = () => {
   const [name, setName] = useState('');
-  const [phone, setNumber] = useState('');
+  const [number, setNumber] = useState('');
   const { contacts } = useSelector(state => state.contacts);
   const dispatch = useDispatch();
 
-  const addContacts = (name, phone) => {
+  const addContacts = (name, number) => {
     const contact = {
       name,
-      phone,
+      number,
     };
     dispatch(addContactThunk(contact));
   };
@@ -23,7 +23,7 @@ export const Forma = () => {
     if (nameContacts.includes(name.toLowerCase())) {
       alert(`${name} is in your contacts`);
     } else {
-      addContacts(name, phone);
+      addContacts(name, number);
       reset();
     }
   };
@@ -31,7 +31,7 @@ export const Forma = () => {
   const hendleNameTelChange = event => {
     const { name, value } = event.currentTarget;
     if (name === 'name') setName(value);
-    if (name === 'phone') setNumber(value);
+    if (name === 'number') setNumber(value);
   };
 
   const reset = () => {
@@ -58,11 +58,11 @@ export const Forma = () => {
           Number
           <Input
             type="tel"
-            name="phone"
+            name="number"
             pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            value={phone}
+            value={number}
             onChange={hendleNameTelChange}
           />
         </label>
