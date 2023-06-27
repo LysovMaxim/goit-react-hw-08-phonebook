@@ -4,6 +4,7 @@ import { UserMenu } from 'components/UserMenu/UserMenu';
 import { useEffect } from 'react';
 import { getCurrentThunk, logoutThunk } from 'redux/sliceUser';
 import { setToken } from 'apiUser';
+import  css  from "./Header.module.css"
 
 const Header = () => {
   const { current, token } = useSelector(state => state.auth);
@@ -17,21 +18,22 @@ const Header = () => {
   }, [token, dispatch, current]);
 
   return (
-    <header>
+    <header className={css.Header}>
       <nav>
-        <ul>
+        <ul className={css.HeaderList}>
           {!token &&<li>
-             <NavLink to="register">Register</NavLink>
+             <NavLink to="register" className={css.HeaderLink}>Register</NavLink>
           </li>}
           {!token && <li>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/login" className={css.HeaderLink}>Login</NavLink>
           </li>}
           {token && <li>
-            <NavLink to="/contacts">Contacts</NavLink>
+            <NavLink to="/contacts" className={css.HeaderLink}>Contacts</NavLink>
           </li>}
         </ul>
+        {current && <UserMenu />}
       </nav>
-      {current && <UserMenu />}
+      
     </header>
   );
 };

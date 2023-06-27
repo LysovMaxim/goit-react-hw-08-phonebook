@@ -1,13 +1,14 @@
 import { register } from 'apiUser';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import css from "./Register.module.css"
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const onSubmit = e => {
     e.preventDefault();
@@ -15,7 +16,7 @@ const Register = () => {
       name,
       email,
       password,
-    }).then(()=> navigate("/login"))
+    }).then(() => navigate('/login'));
   };
 
   const onChange = ({ target: { value, name } }) => {
@@ -28,38 +29,42 @@ const Register = () => {
 
   return (
     <>
-      <form autoComplete="on" onSubmit={onSubmit}>
-        <div>
-          <label htmlFor="examplInputName">Name</label>
+      <form autoComplete="on" onSubmit={onSubmit} className={css.RegisterForm}>
+        <label className={css.RegisterLabel}>
+          Name
           <input
             type="text"
             name="name"
             id="examplInputName"
             onChange={onChange}
             required
+            className={css.RegisterInput}
           />
-        </div>
-        <div>
-          <label htmlFor="examplInputEmail">Email address</label>
+        </label>
+        <label className={css.RegisterLabel}>
+          Email address
           <input
             type="email"
             name="email"
             id="examplInputEmail"
             onChange={onChange}
             required
+            className={css.RegisterInput}
           />
-        </div>
-        <div>
-          <label htmlFor="examplInputPassword">Password</label>
+        </label>
+        <label className={css.RegisterLabel}>
+          Password
           <input
             type="password"
             name="password"
             id="examplInputPassword"
             onChange={onChange}
             required
+            className={css.RegisterInput}
           />
-        </div>
-        <button type="submit">Register</button>
+        </label>
+
+        <button type="submit" className={css.RegisterBtn}>Register</button>
       </form>
     </>
   );

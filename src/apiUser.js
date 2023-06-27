@@ -33,3 +33,19 @@ export const logout = async () => {
   await instance.post('/users/logout')
   dellToken()
 };
+
+
+export const getContacts = async () => {
+  const { data } = await instance.get("/contacts");
+  return data;
+};
+
+export const addContacts = async post => {
+  const { data } = await instance.post("/contacts",post);
+  return data;
+};
+
+export const deleteContact = async id => {
+  const { data } = await instance.delete(`/contacts/${id}`);
+  return data;
+};
