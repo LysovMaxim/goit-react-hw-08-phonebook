@@ -2,6 +2,7 @@ import { register } from 'apiUser';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import css from "./Register.module.css"
+import { toast } from 'react-hot-toast';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -16,7 +17,8 @@ const Register = () => {
       name,
       email,
       password,
-    }).then(() => navigate('/login'));
+    }).then(() => navigate('/login'))
+      .catch(error => toast.error(`Data entered incorrectly`));
   };
 
   const onChange = ({ target: { value, name } }) => {

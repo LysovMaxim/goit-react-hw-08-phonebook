@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginThunk } from 'redux/sliceUser';
 import css from "./Login.module.css"
+import { toast } from 'react-hot-toast';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -15,8 +16,9 @@ const Login = () => {
     e.preventDefault();
     dispatch(loginThunk({ email, password }))
       .unwrap()
-      .then(() => navigate('/contacts'))
-      .catch(error => error.message);
+      .then(() => toast.success("Welcome"), navigate('/contacts')
+      )
+      .catch(error => toast.error(`Wrong password or email`));
   };
 
   const onChange = ({ target: { value, name } }) => {

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { addContacts, deleteContact, getContacts } from '../apiUser';
+import { toast } from 'react-hot-toast';
 
 export const getContactsThunk = createAsyncThunk('contacts/fetchAll', () => {
   return getContacts();
@@ -43,6 +44,7 @@ const contactSlice = createSlice({
         state.isLoading = false;
         state.contacts.push(payload);
         state.error = '';
+        toast.success("Сontact created")
       })
       .addCase(addContactThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -57,6 +59,7 @@ const contactSlice = createSlice({
           contact => contact.id !== payload.id
         );
         state.error = '';
+        toast.success("Сontact deleted")
       })
       .addCase(deleteContactThunk.rejected, (state, { payload }) => {
         state.isLoading = false;

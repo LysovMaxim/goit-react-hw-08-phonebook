@@ -5,10 +5,12 @@ import Login from '../pages/Login';
 import Header from './Header/Header';
 import PrivateRouter from './PrivateRouter/PrivateRouter';
 import PublicRouter from './PublicRouter/PublicRouter';
+import { Toaster } from 'react-hot-toast';
 
 export const App = () => {
   return (
     <>
+      <Toaster/>
       <Header />
       <Routes>
         <Route
@@ -37,6 +39,6 @@ export const App = () => {
         />
         <Route path="*" element={<Navigate to={'/login'} />} />
       </Routes>
-    </>
+     </>
   );
 };
